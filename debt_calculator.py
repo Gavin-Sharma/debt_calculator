@@ -162,7 +162,6 @@ class Ui_MainWindow(object):
         self.label_2.setText(_translate("MainWindow", "Payoff methods:"))
         self.label_3.setText(_translate("MainWindow", "Debts"))
         self.label_4.setText(_translate("MainWindow", "Extra contribution money"))
-        self.label_5.setText(_translate("MainWindow", "strategy:"))
 
     def add_row(self):
         """
