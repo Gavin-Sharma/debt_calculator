@@ -26,3 +26,7 @@ To use the Debt Calculator, follow these simple installation steps:
 4. Run the application: `python debt_calculator.py`
 
 That's it! You're now ready to start using the Debt Calculator to manage and optimize your debt repayment strategy.
+
+### Note:
+
+Debt amount, interest rate, minimum payment, and extra contribution money inputs should only contain numbers or decimal points (.) Example: 86 or 57.4

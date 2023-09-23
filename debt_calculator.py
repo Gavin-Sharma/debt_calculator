@@ -141,7 +141,7 @@ class Ui_MainWindow(object):
         item = self.debt_table.horizontalHeaderItem(1)
         item.setText(_translate("MainWindow", "Debt Amount"))
         item = self.debt_table.horizontalHeaderItem(2)
-        item.setText(_translate("MainWindow", "Intrest Rate"))
+        item.setText(_translate("MainWindow", "interest Rate"))
         item = self.debt_table.horizontalHeaderItem(3)
         item.setText(_translate("MainWindow", "Min Payment"))
         self.addPushButton.setText(_translate("MainWindow", "Add Row"))
@@ -162,7 +162,7 @@ class Ui_MainWindow(object):
         self.label_2.setText(_translate("MainWindow", "Payoff methods:"))
         self.label_3.setText(_translate("MainWindow", "Debts"))
         self.label_4.setText(_translate("MainWindow", "Extra contribution money"))
-
+        
     def add_row(self):
         """
         When the add button is pressed, add a row to the table.
@@ -230,8 +230,8 @@ class Ui_MainWindow(object):
                 # *** AVLANCHE METHOD ***
 
         if payoff_method == "avalanche":
-            # sort the debts by the highest interest rate
-            debts.sort(key=lambda x: x[2])
+            # sort the debts from highest interest rate to lowest
+            debts.sort(key=lambda x: x[2], reverse = True)
 
             if extra_money != 0 or extra_money != "":
                 for position, debt in enumerate(debts):
@@ -338,9 +338,12 @@ class Ui_MainWindow(object):
                 {
                     "Debt Name": debt[0],
                     "Debt Amount": str(debt[1]),
+                    "Interest Rate": str(debt[2]),
                     "New Min Payment": str(debt[3]),
                 }
             )
+        print("__________________________")
+        print(results_data)
 
         # Display the results in the new window
         self.show_results_window(results_data)
@@ -361,21 +364,21 @@ class ResultsWindow(QDialog):
 
         self.results_table = QTableWidget()
         self.results_table.setRowCount(len(results_data))
-        self.results_table.setColumnCount(
-            3
-        )  # Columns for Debt Name, Debt Amount, and New Min Payment
+        self.results_table.setColumnCount(4)
 
         # Set column headers
         self.results_table.setHorizontalHeaderLabels(
-            ["Debt Name", "Debt Amount", "New Min Payment"]
+            ["Debt Name", "Debt Amount", "Interest Rate", "New Min Payment"]
         )
 
         for row, data in enumerate(results_data):
             self.results_table.setItem(row, 0, QTableWidgetItem(data["Debt Name"]))
             self.results_table.setItem(row, 1, QTableWidgetItem(data["Debt Amount"]))
-            self.results_table.setItem(
-                row, 2, QTableWidgetItem(data["New Min Payment"])
-            )
+            self.results_table.setItem(row, 2, QTableWidgetItem(data["Interest Rate"]))
+            self.results_table.setItem(row, 3, QTableWidgetItem(data["New Min Payment"]))
+
+
+
 
         # Customize the table's appearance
         self.results_table.setStyleSheet(
